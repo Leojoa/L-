@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi niña hermosa 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+min-height:100vh;
+overflow-x:hidden;
+overflow-y:auto;
+background:linear-gradient(-45deg,#ff4e9b,#8e2de2,#ff6ec4,#ff2e88);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* LOCK */
+
+#lock-screen{
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.lock-box{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+padding:40px;
+border-radius:25px;
+width:340px;
+}
+
+input{
+margin-top:15px;
+padding:12px;
+width:100%;
+border-radius:10px;
+border:none;
+text-align:center;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+font-size:16px;
+}
+
+button:hover{transform:scale(1.1);}
+
+.shake{animation:shake 0.4s;}
+@keyframes shake{
+0%,100%{transform:translateX(0);}
+25%{transform:translateX(-6px);}
+50%{transform:translateX(6px);}
+75%{transform:translateX(-6px);}
+}
+
+/* MAIN */
+
+#main{
+display:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+width:100%;
+height:100vh;
+padding:20px;
+position:relative;
+}
+
+/* TYPE */
+
+#typewriter{
+font-size:2rem;
+max-width:800px;
+}
+
+/* COUNTER */
+
+#counter{
+margin-top:30px;
+font-size:1.3rem;
+display:none;
+}
+
+.time-number{
+font-size:1.6rem;
+font-weight:bold;
+animation:pulse 1.5s infinite;
+display:inline-block;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.15);}
+100%{transform:scale(1);}
+}
+
+/* DRAMATIC OVERLAY */
+
+#dramatic-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+animation:fadeIn 1.5s forwards;
+z-index:1000;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.dramatic-text{
+font-size:2.5rem;
+font-weight:800;
+animation:zoomDramatic 2s ease forwards;
+}
+
+@keyframes zoomDramatic{
+from{transform:scale(0.5);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.valentine-buttons{
+margin-top:30px;
+opacity:0;
+animation:fadeButtons 2s 2s forwards;
+}
+
+@keyframes fadeButtons{
+to{opacity:1;}
+}
+
+/* FINAL */
+
+#final-section{
+display:none;
+margin-top:40px;
+max-width:900px;
+}
+
+.final-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+margin-top:20px;
+}
+
+.image-box{
+width:250px;
+height:250px;
+overflow:hidden;
+border-radius:20px;
+box-shadow:0 0 25px rgba(255,255,255,0.6);
+}
+
+.image-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.letter{
+margin-top:20px;
+background:white;
+color:#333;
+padding:20px;
+border-radius:15px;
+max-height:0;
+overflow:hidden;
+transition:max-height 0.8s ease, opacity 0.5s ease;
+opacity:0;
+}
+
+.letter.open{
+max-height:2000px;
+opacity:1;
+}
+
+/* HEART RAIN */
+
+.heart{
+position:fixed;
+font-size:22px;
+animation:fall 3s linear forwards;
+pointer-events:none;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);opacity:1;}
+100%{transform:translateY(110vh);opacity:0;}
+}
+
+audio{display:none}
+
+.unlock-effect{
+animation:unlockZoom 0.8s ease forwards;
+}
+
+@keyframes unlockZoom{
+0%{transform:scale(1);opacity:1;}
+100%{transform:scale(1.3);opacity:0;}
+}
+
+#heart-rain{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+z-index:9999;
+}
+
+.heart{
+position:absolute;
+color:#ff2e63;
+font-size:20px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10vh) scale(1);
+opacity:1;
+}
+100%{
+transform:translateY(110vh) scale(1.5);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" src="musica.mp3" loop></audio>
+
+<div id="lock-screen">
+<div class="lock-box" id="lock-box">
+<h2>🔒 Sorpresa protegida</h2>
+<p>Ingresa la fecha correcta 🥺</p>
+<input type="text" id="date-input" placeholder="DD/MM/AA" maxlength="8">
+<button id="unlock-btn">💗 Desbloquear 💗</button>
+</div>
+</div>
+
+<div id="main">
+<h1 id="typewriter"></h1>
+<p id="counter"></p>
+</div>
+
+<div id="dramatic-overlay">
+<div class="dramatic-text">¿Quieres ser mi San Valentín? 💘</div>
+<div class="valentine-buttons">
+<button id="yes-btn">SII 💖</button>
+<button id="no-btn">No 🙄</button>
+</div>
+</div>
+
+<div id="final-section">
+<h2>Entonces déjame decirte algo...</h2>
+<div class="final-container">
+<div>
+<p>
+Buenos días tardes o noches, no sé cuándo leerás esto... Se que no estamos juntos ni nada pero quería hacerte este pequeño detallito que no es la gran cosa xq eres la persona más importante para mí, me ENCANTA TODOOO de ti. Voy a recordarme siempre todos los días que pasamos en mariscal y en karate 💗, me encantó la primera vez que nos sentamos y abrazamos en Mariscal, quería quedarme así para siempre 😭💖. Fue el momento más hermoso en mi vida 🥺, y ya está de más decir lo de tus besos 💗 yyyy al final nunca nos inflamos los cachetes 😔 jsjsjjs
+Creo que realmente no te divierto tanto porque casi siempre estoy callado o serio 😭 TE JUROOO que quiero dejar de ser así, quiero ser como TUUUU, tan alegre, tan bonita, TAN PERFECTAAA 💖. Bueno, cuidate muchísimo mi princesita bella y hermosa, te extraño demasiado, en especial tus perfectos abrazos 🥺 TE QUIERO Y TE AMO MUUUCHOO ahora te dejo una cartita 💓
+</p>
+
+<button id="letterBtn">Abrir carta 💌</button>
+<div class="letter" id="letter">
+Niña hermosaaa 💖<br>
+Hay tantas cosas bonitas que quisiera decirte que no se cómo expresarme por que sin duda, TUUUU te mereces todo lo bonito de este mundo, estuve pensando en la vez que nos conocimos en cuando el destino sin saber hizo que conociera a una persona fantástica como lo eres tú que sin esperarlo, llegaste a mi vida a iluminarla con tu amor y con tu cariño, llegaste hacer mi angelito de la guarda mi compañía mi razón de ser que ahorita no tengo palabras para agradecer tu hermosa compañía, me pone muy feliz el despertar día a día y saber que puedo hablar con la persona que siempre soñé y que siempre quise en mi vida, tú eres lo más hermoso que diosito me mandó eres la persona la cual con un solo mensaje me hace feliz, unos segundos viéndote o minutos hacen que mis días se vuelvan mejores, te volviste la persona por la cual me motivo día a día la cual me inspira a ser mejor eres como un angelito que de la nada llego a mi camino y estoy tan agradecido soy el hombre tan afortunado por tener a una mujer tan espectacular como tú mi amor, no se que hice para merecer tu amor simplemente gracias por cada día que estás a mi lado te amo no tienes idea, tu carita, tu sonrisa, tú voz, todo de ti es lo mejor de la vida, tú me enseñaste a ser mejor persona, saber enfrentar mis problemas, llegaste a mi vida a darle un sentido más qué hay cosas bonitas en la vida esperándonos, mi vida sin ti no tiene sentido princesa, soy el hombre más feliz a tu lado, y prometo hacerte la mujer más feliz de este mundo,
+TE AMOOOO, gracias por todo mi niña ❤️‍🩹
+</div>
+</div>
+
+<div class="image-box">
+<img src="love.jpg" alt="Nosotros">
+</div>
+</div>
+</div>
+
+<script>
+
+const correctDate="06/01/26";
+const input=document.getElementById("date-input");
+const button=document.getElementById("unlock-btn");
+const lockBox=document.getElementById("lock-box");
+const lockScreen=document.getElementById("lock-screen");
+const main=document.getElementById("main");
+const music=document.getElementById("bg-music");
+
+input.addEventListener("input",function(){
+let value=input.value.replace(/\D/g,"");
+if(value.length>6)value=value.slice(0,6);
+if(value.length>=5){
+input.value=value.slice(0,2)+"/"+value.slice(2,4)+"/"+value.slice(4);
+}else if(value.length>=3){
+input.value=value.slice(0,2)+"/"+value.slice(2);
+}else{
+input.value=value;
+}
+});
+
+button.addEventListener("click",()=>{
+if(input.value===correctDate){
+
+lockBox.classList.add("unlock-effect");
+
+setTimeout(()=>{
+lockScreen.style.display="none";
+main.style.display="flex";
+music.play().catch(()=>{});
+startTypewriter();
+},800);
+}else{
+lockBox.classList.add("shake");
+setTimeout(()=>lockBox.classList.remove("shake"),400);
+input.value="";
+}
+});
+
+const messages=[
+"Holaa ser humano 🥹",
+"La niña más increíble del mundo mundial 💗",
+"Nose como lo hiciste... 🥹",
+"Pero hiciste mi mundo más bonito ✨",
+"Todo se volvió perfecto cuando te conocí 🥹💓",
+"Cada momento junto a ti es único y especial💖",
+"El 06/01/26 a las 12:51pm...",
+"Fue el primer momento donde estuve con el amor de mi vida 😭",
+"Quiero hacer TODOO junto a TIII ✨",
+"Eres lo más valioso que tengo en mi vida 💗",
+"No te quiero perder, lo digo desde el fondo de mi corazón 🥺",
+"Eres PERFECTA tal como eres 💖",
+"No hace falta que cambies en algoo",
+"Se que ahorita no somos nada perooo... 🥺",
+"Te quiero decir y preguntar algo..."
+];
+
+let messageIndex=0;
+let charIndex=0;
+const typewriter=document.getElementById("typewriter");
+const counter=document.getElementById("counter");
+
+function startTypewriter(){
+typeEffect();
+}
+
+function typeEffect(){
+if(messageIndex<messages.length){
+if(charIndex<messages[messageIndex].length){
+typewriter.textContent+=messages[messageIndex].charAt(charIndex);
+charIndex++;
+setTimeout(typeEffect,50);
+}else{
+setTimeout(()=>{
+typewriter.textContent="";
+charIndex=0;
+messageIndex++;
+typeEffect();
+},1500);
+}
+}else{
+counter.style.display="block";
+startCounter();
+}
+}
+
+const startDate=new Date("2026-01-06T12:51:11");
+
+function startCounter(){
+setInterval(updateCounter,1000);
+updateCounter();
+setTimeout(()=>{
+document.getElementById("dramatic-overlay").style.display="flex";
+},5000);
+}
+
+function updateCounter(){
+const now=new Date();
+let diff=now-startDate;
+
+if(diff<0){
+counter.textContent="Esperando nuestro inicio oficial 💖";
+return;
+}
+
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff/(1000*60*60))%24);
+const minutes=Math.floor((diff/(1000*60))%60);
+const seconds=Math.floor((diff/1000)%60);
+
+counter.innerHTML=
+`Desde ese día pasaron 
+<span class="time-number">${days}</span> días,
+<span class="time-number">${hours}</span> horas,
+<span class="time-number">${minutes}</span> minutos y
+<span class="time-number">${seconds}</span> segundos ❤️`;
+}
+
+const yesBtn=document.getElementById("yes-btn");
+const noBtn=document.getElementById("no-btn");
+const overlay=document.getElementById("dramatic-overlay");
+const finalSection=document.getElementById("final-section");
+
+noBtn.style.position="fixed";
+noBtn.style.zIndex="2000";
+
+function moveNoButton(){
+const btnWidth=noBtn.offsetWidth;
+const btnHeight=noBtn.offsetHeight;
+const maxX=window.innerWidth-btnWidth-20;
+const maxY=window.innerHeight-btnHeight-20;
+noBtn.style.left=Math.random()*maxX+"px";
+noBtn.style.top=Math.random()*maxY+"px";
+}
+
+noBtn.addEventListener("mouseover",moveNoButton);
+noBtn.addEventListener("click",moveNoButton);
+
+yesBtn.addEventListener("click",()=>{
+overlay.style.display="none";
+main.style.display="none";
+finalSection.style.display="block";
+startHeartRain();
+heartRain();
+});
+
+function startHeartRain(){
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.textContent="💖";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),3000);
+},200);
+}
+
+const letterBtn=document.getElementById("letterBtn");
+const letter=document.getElementById("letter");
+
+letterBtn.addEventListener("click",()=>{
+letter.classList.toggle("open");
+});
+
+
+function heartRain(){
+const container = document.getElementById("heart-rain");
+
+for(let i=0; i<150; i++){
+
+const heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML = "💖";
+
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+heart.style.animationDelay = Math.random() * 2 + "s";
+
+container.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+}
+</script>
+
+</body>
+<div id="heart-rain"></div>
+  </html>
